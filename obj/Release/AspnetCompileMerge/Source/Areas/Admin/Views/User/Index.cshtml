@@ -1,0 +1,26 @@
+﻿@model List<WebsiteGiay.Identity.AppUser>
+@{
+    ViewBag.Title = "User";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_LayoutPage1.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone number</th>
+        <th>Date of birth</th>
+        <th>Address</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.UserName</td>
+            <td>@item.Email</td>
+            <td>@item.PhoneNumber</td>
+            <td>@item.Birthday</td>
+            <td>@item.Address</td>
+        </tr>
+    }
+</table>
+

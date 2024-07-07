@@ -1,0 +1,64 @@
+﻿@model WebsiteGiay.ViewModel.RegisterVM
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+
+<div class="container_form">
+    <h1 style="text-align:center">Create Account</h1>
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+    {
+
+        <div class="col-md-12 mt-4">
+            @Html.TextBoxFor(row => row.UserName, new { placeholder = "Username", @class = "form-control" })
+            @Html.ValidationMessageFor(row => row.UserName)
+        </div>
+
+        <div class="col-md-12 mt-4">
+            
+            @Html.TextBoxFor(row => row.Email, new { placeholder = "Email", @class = "form-control", type = "email" })
+            @Html.ValidationMessageFor(row => row.Email)
+        </div>
+
+        <div class="col-md-12 mt-4">
+           
+            @Html.PasswordFor(row => row.Password, new { placeholder = "Password", @class = "form-control" })
+            @Html.ValidationMessageFor(row => row.Password)
+        </div>
+
+        <div class="col-md-12 mt-4">
+           
+            @Html.PasswordFor(row => row.ConfirmPassword, new { placeholder = "ConfirmPassword", @class = "form-control" })
+            @Html.ValidationMessageFor(row => row.ConfirmPassword)
+        </div>
+
+        <div class="col-md-12 mt-4">
+           
+            @Html.TextBoxFor(row => row.PhoneNumber, new { placeholder = "PhoneNumber", @class = "form-control" })
+            @Html.ValidationMessageFor(row => row.PhoneNumber)
+        </div>
+
+        <div class="col-md-12 mt-4">
+           
+            @Html.TextBoxFor(row => row.DateOfBirth, new { placeholder = "DateOfBirth", @class = "form-control", type = "date" })
+            @Html.ValidationMessageFor(row => row.DateOfBirth)
+        </div>
+
+        <div class="col-md-12 mt-4">
+           
+            @Html.TextBoxFor(row => row.Address, new { placeholder = "Address", @class = "form-control" })
+            @Html.ValidationMessageFor(row => row.Address)
+        </div>
+
+        <div class="col-md-12 mt-4">
+           
+            @Html.TextBoxFor(row => row.City, new { placeholder = "City", @class = "form-control" })
+            @Html.ValidationMessageFor(row => row.City)
+        </div>
+
+        <div class="text-center mt-2">
+            <button class="btn btn-primary" type="submit">Sign up</button>
+        </div>
+    }
+</div>
+

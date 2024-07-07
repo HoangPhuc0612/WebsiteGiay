@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="~/Scripts/jquery-3.7.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <link rel="stylesheet" href="~/Style/Style.css" />
+    <link rel="shortcut icon" href="~/Picture/logo.png" />
+    <title>Shoes Shop</title>
+</head>
+<body>
+    <header>
+        <div id="header">
+            <div class="logo">
+                <h2>Admin</h2>
+            </div>
+            <ul>
+                <li><a href="/Admin/Home">Trang chủ</a></li>
+                <li><a href="/Admin/Product">Sản phẩm</a></li>
+                <li><a href="/Admin/Product/Create">Thêm sản phẩm</a></li>
+                <li><a href="/Admin/User">Danh sách account</a></li>
+            </ul>
+            <div class="icons">
+                <div class="icons_box">
+                    <a href="/Account/Logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+                    <p>Đăng xuất</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        @RenderBody()
+    </section>
+
+    <footer>
+        <div class="footer_main">
+            <div class="tag">
+                <h1>Liên hệ</h1>
+                <a href="#"><i class="fa-solid fa-house"></i>140 Lê Trọng Tấn, Tây Thạnh, Tân Phú, Thành phố Hồ Chí Minh</a>
+                <a href="#"><i class="fa-solid fa-phone"></i>+84 88 800 3346</a>
+                <a href="#"><i class="fa-solid fa-envelope"></i>hoangphucdang06122003@gmail.com</a>
+            </div>
+            <div class="tag">
+                <h1>Hỗ trợ</h1>
+                <a href="#" class="center">FAQ</a>
+                <a href="#" class="center">Shipping</a>
+                <a href="#" class="center">Returns</a>
+                <a href="#" class="center">Payment Options</a>
+            </div>
+
+            <div class="tag">
+                <h1>Cửa hàng</h1>
+                <a href="#" class="center">Phú Nhuận</a>
+                <a href="#" class="center">Tân Phú</a>
+                <a href="#" class="center">Bình Tân</a>
+                <a href="#" class="center">Gò Vấp</a>
+            </div>
+
+            <div class="tag">
+                <h1>Social</h1>
+                <div class="social_link">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

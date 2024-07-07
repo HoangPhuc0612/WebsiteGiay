@@ -1,0 +1,60 @@
+﻿@model WebsiteGiay.Models.Product
+@{
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<div class="productDetail_container">
+    <div class="img_container">
+        <img src="@Model.ImageURL" style="width:60%" />
+    </div>
+    @using (Html.BeginForm("Insert", "Cart", FormMethod.Post))
+    {
+        <div class="detail_container">
+            @Html.TextBoxFor(row=>row.ProductId, new { @class = "form-control", value = Model.ProductId, type = "hidden"})
+            <h3 style="font-weight:bold;">@Model.ProductName - @Model.Category.CategoryName</h3>
+            <h4>Gender: @Model.Gender</h4>
+            <h4>Kiểu dáng: @Model.Category.CategoryName</h4>
+            <h4 style="color:#F15E2C;font-weight:bold;">@Html.DisplayFor(row => Model.Price).ToString().Replace(",", ".")</h4>
+            <div class="size_quantity_container">
+                <div class="size_container">
+                    <h4>Size</h4>
+                    @{
+                        List<SelectListItem> list = new List<SelectListItem>();
+                        string[] listsize = Model.Size.Split(',');
+                        foreach (string item in listsize)
+                        {
+                            SelectListItem size = new SelectListItem();
+                            size.Text = item;
+                            size.Value = item;
+                            list.Add(size);
+                        }
+
+                    }
+                    @Html.DropDownListFor(row => row.Size, list, new { @class = "form-control" })
+                </div>
+                <div class="quantity_container">
+                    <h4>
+                        Số lượng
+                    </h4>
+                    @Html.DropDownList("Soluong", new List<SelectListItem>
+               {
+                   new SelectListItem{Text="1",Value="1"},
+                   new SelectListItem{Text="2",Value="2"},
+                   new SelectListItem{Text="3",Value="3"},
+                   new SelectListItem{Text="4",Value="4"},
+                   new SelectListItem{Text="5",Value="5"},
+                   new SelectListItem{Text="6",Value="6"},
+                   new SelectListItem{Text="7",Value="7"},
+                   new SelectListItem{Text="8",Value="8"},
+                   new SelectListItem{Text="9",Value="9"},
+                   new SelectListItem{Text="10",Value="10"}
+               }, new { @class = "form-control" })
+                </div>
+            </div>
+            <div style="margin-bottom:10px;">
+                <button class="btn btn-dark" style="width:350px;font-weight:bold;font-size:20px;" type="submit">Thêm vào giỏ hàng</button>
+                <a class="btn btn-dark" style="font-weight: bold; font-size: 20px;"><i class="fa-solid fa-heart"></i></a>
+            </div>
+            <button class="btn btn-primary" style="background-color: #b800f7; width: 400px; font-weight: bold; font-size: 20px;" type="submit">Thanh toán</button>
+        </div>
+    }
+</div>

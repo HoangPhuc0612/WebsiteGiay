@@ -1,0 +1,98 @@
+﻿@model List<WebsiteGiay.Models.ShoppingCart>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<h2>GIỎ HÀNG</h2>
+<div class="Cart_container row" style="margin-right:0px">
+    <div class="col-md-9">
+        <table class="table">
+            <thead>
+                <tr class="table-light" style="text-align:center;">
+                    <th>STT</th>
+                    <th>Hình ảnh</th>
+                    <th>Tên giày</th>
+                    <th>Size</th>
+                    <th>Số lượng</th>
+                    <th>Giá tiền</th>
+                    <th>Tổng tiền</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                @{int index = 1; int total_price = 0; }
+                @foreach (var item in Model)
+                {
+
+                    int total = item.Soluong * item.Product.Price;
+                    total_price += total;
+                    <tr class="align-middle" style="font-size:15px;text-align:center;">
+                        <td style="width:15px;text-align:center;align-items:center;">@index</td>
+                        <td><a href="/Home/ProductDetail/@item.ProductId"><img src="@item.Product.ImageURL" style="width:150px"></a></td>
+                        <td>@item.Product.ProductName</td>
+                        <td>@item.Size</td>
+                        <td>
+                            @using (Html.BeginForm("Update", "Cart", FormMethod.Get))
+                            {
+                                <input type="hidden" name="ProductId" value="@item.ProductId" />
+                                <input type="number" name="soluong" value="@item.Soluong" min="1" style="width:60px;border-radius:5px;text-align:center;height:38px;" />
+                                <button type="submit" class="btn btn-success" style="height:">Update</button>
+                            }
+
+                        </td>
+                        <td>@item.Product.Price.ToString("N0") VND</td>
+                        <td>@total.ToString("N0") VND</td>
+                        <td><a href="/Cart/Delete/@item.ProductId"><i class="fa-solid fa-circle-xmark" style="color: #f40101;"></i></a></td>
+                    </tr>
+
+                    index++;
+                }
+                @{ 
+                    if (total_price==0)
+                    {
+                        <tr>
+                            <td colspan="8">Chưa có sản phầm nào trong giỏ hàng</td>
+                        </tr>
+                    }
+                }
+                <tr style="border-top: 2px solid currentcolor; border-bottom: 2px solid currentcolor; ">
+                    <td colspan="6" style="text-align:right;font-weight:bold;">Total Price:</td>
+                    <td colspan="2">@total_price.ToString("N0") VND</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+    <div class="col-md-3 paying_container" style="font-weight:bold;">
+        <ul class="list-group">
+            <li class="list-group-item title">ĐƠN HÀNG</li>
+            <li class="list-group-item divider"></li>
+            <li class="list-group-item title">NHẬP MÃ KHUYẾN MÃI</li>
+            <li class="list-group-item">
+                <div class="input-group">
+                    <input type="text" class="form-control text-uppercase" />
+                    <span class="input-group-btn"><button class="btn btn-apply" type="button">ÁP DỤNG</button></span>
+                </div>
+            </li>
+            <li class="list-group-item divider"></li>
+            <li class="list-group-item text-1">
+                <span class="title-3">Đơn hàng:</span>
+                <span class="title-3-1" style="float:right">@total_price.ToString("N0") VND</span>
+            </li>
+            <li class="list-group-item text-2">
+                <span class="title-3">Giảm:</span>
+                <span class="title-4-1" style="float: right">0 VND</span>
+            </li>
+            <li class="list-group-item divider"></li>
+            <li class="list-group-item text-2">
+                <span class="title-5">Tổng tiền:</span>
+                <span class="title-5-1" style="float:right">@total_price.ToString("N0") VND</span>
+            </li>
+            <li class="list-group-item">
+                <button class="btn btn-apply" style="width:100%;">THANH TOÁN</button>
+            </li>
+        </ul>
+    </div>
+    <div class="comeback_container">
+        <a class="btn btn-dark" href="/Home/Products" style="margin-left:20px;"><= Tiếp tục mua sắm</a>
+    </div>
+</div>

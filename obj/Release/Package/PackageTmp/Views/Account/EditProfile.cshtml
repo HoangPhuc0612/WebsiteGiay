@@ -1,0 +1,49 @@
+﻿@model WebsiteGiay.Identity.AppUser
+
+@{
+    ViewBag.Title = "EditProfile";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+
+<div class="Editform_container container-fluid" style="width: 50%; padding: 30px; border-radius: 20px; box-shadow: 0 0 8px #6c14d0;">
+    <h2 style="text-align:center;">Edit Profile</h2>
+    @using (Html.BeginForm("EditProfile", "Account", FormMethod.Post))
+    {
+        <div class="row" style="margin-bottom:10px;">
+
+            @Html.TextBoxFor(row => row.Id, new { @class = "form-control", value = Model.Id, type = "hidden" })
+            <div class="col-md-12">
+                @Html.LabelFor(row => row.UserName, "UserName")
+                @Html.TextBoxFor(row => row.UserName, new { @class = "form-control", value = Model.UserName })
+            </div>
+
+            <div class="col-md-12">
+                @Html.LabelFor(row => row.Email, "Email")
+                @Html.TextBoxFor(row => row.Email, new { @class = "form-control", value = Model.Email })
+            </div>
+
+            <div class="col-md-12">
+                @Html.LabelFor(row => row.PhoneNumber, "PhoneNumber")
+                @Html.TextBoxFor(row => row.PhoneNumber, new { @class = "form-control",value=Model.PhoneNumber, type = "Tel" })
+            </div>
+
+            <div class="col-md-12">
+                @Html.LabelFor(row => row.Address, "Address")
+                @Html.TextBoxFor(row => row.Address, new { @class = "form-control", value = Model.Address })
+            </div>
+
+            <div class="col-md-12">
+                @Html.LabelFor(row => row.City, "City")
+                @Html.TextBoxFor(row => row.City, new { @class = "form-control", value = Model.City })
+            </div>
+
+            <div class="col-md-12">
+                @Html.LabelFor(row => row.Birthday, "Birthday")
+                @Html.TextBoxFor(row => row.Birthday, new { @class = "form-control", value = Model.Birthday, type = "Date" })
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="/Account/MyProfile" class="btn btn-danger">Cancel</a>
+    }
+</div>
+

@@ -1,0 +1,33 @@
+﻿@model WebsiteGiay.Identity.AppUser
+@{
+    ViewBag.Title = "MyProfile";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+<div style="width: 600px; text-align: center; margin: auto; box-shadow: 0 0 8px rgba(0,0,0,0.6); border-radius: 20px; padding: 20px;">
+    <h1 style="font-weight:bold;margin-bottom:20px;">My profile</h1>
+    <div class="container-fluid" style="width:500px;">
+        <table class="table" style="text-align:left;">
+            <tr>
+                <th>Username</th>
+                <td>@Model.UserName</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>@Model.Email</td>
+            </tr>
+            <tr>
+                <th>Phone number</th>
+                <td>@Model.PhoneNumber</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>@Model.Address</td>
+            </tr>
+            <tr>
+                <th>Date of birth</th>
+                <td>@Model.Birthday.Value.ToString("dd/MM/yyyy")</td>
+            </tr>
+        </table>
+        <a href="/Account/EditProfile/@Model.Id" class="btn btn-primary">Edit</a>
+    </div>
+</div>

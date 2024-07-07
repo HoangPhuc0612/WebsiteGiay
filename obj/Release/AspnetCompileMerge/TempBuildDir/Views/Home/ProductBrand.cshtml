@@ -1,0 +1,22 @@
+﻿@model List<WebsiteGiay.Models.Brand>
+@{
+    ViewBag.Title = "ProductBrand";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<div style="margin:auto;width:80%;">
+    <h2 style="text-align:center;">ProductBrand</h2>
+    <table class="table">
+        <tr>
+            <td>Tên hãng</td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="/Home/Products?sort=@item.BrandName">@item.BrandName</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

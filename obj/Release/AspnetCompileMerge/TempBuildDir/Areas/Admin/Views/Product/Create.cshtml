@@ -1,0 +1,75 @@
+﻿@model WebsiteGiay.Models.Product
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="form_container container-fluid">
+    @using (Html.BeginForm("Create", "Product",new {area ="Admin"}, FormMethod.Post,new {enctype="multipart/form-data"}))
+    {
+        <div class="row" style="margin-bottom:10px;">
+            <div class="col-md-6">
+                @Html.LabelFor(row => row.ProductId, "Product Id")
+                @Html.TextBoxFor(row => row.ProductId, new { @class = "form-control", placeholder = "Product id" })
+                @Html.ValidationMessageFor(row => row.ProductId)
+            </div>
+
+            <div class="col-md-6">
+                @Html.LabelFor(row => row.ProductName, "Product Name")
+                @Html.TextBoxFor(row => row.ProductName, new { @class = "form-control", placeholder = "Product name" })
+                @Html.ValidationMessageFor(row => row.ProductName)
+            </div>
+
+            <div class="col-md-6">
+                @Html.LabelFor(row => row.Price, "Price")
+                @Html.TextBoxFor(row => row.Price, new { @class = "form-control", type = "number" })
+                @Html.ValidationMessageFor(row => row.Price)
+            </div>
+
+            <div class="col-md-6">
+                @Html.LabelFor(row => row.Status, "Status")
+                @Html.DropDownListFor(row => row.Status, new List<SelectListItem>
+           {
+                new SelectListItem{Text="In of stock",Value="In of stock"},
+                new SelectListItem{Text="Out of stock",Value="Out of stock"}
+           }, "Please Select", new { @class = "form-control" })
+                @Html.ValidationMessageFor(row => row.Status)
+            </div>
+
+            <div class="col-md-6">
+                @Html.LabelFor(row => row.ImageURL, "Image URL")
+                @Html.TextBox("ImageFile","ImageFile",new {@class = "form-control",type="file"})
+            </div>
+
+            <div class="col-md-6">
+                @Html.LabelFor(row => row.BrandID, "Brand")
+                @Html.DropDownListFor(row => row.BrandID, new SelectList(ViewBag.ListBrand, "BrandID", "BrandName"), "Please Select", new { @class = "form-control" })
+                @Html.ValidationMessageFor(row => row.BrandID)
+            </div>
+
+            <div class="col-md-6">
+                @Html.LabelFor(row => row.CategoryID, "Category")
+                @Html.DropDownListFor(row => row.CategoryID, new SelectList(ViewBag.ListCate, "CategoryID", "CategoryName"), "Please Select", new { @class = "form-control" })
+                @Html.ValidationMessageFor(row => row.CategoryID)
+            </div>
+
+            <div class="col-md-6">
+                @Html.LabelFor(row => row.Gender, "Gender")
+                @Html.DropDownListFor(row => row.Gender, new List<SelectListItem>
+            {
+                new SelectListItem{Text="Unisex",Value="Unisex"},
+                new SelectListItem{Text="Male",Value="Male"},
+                new SelectListItem{Text="Female",Value="Female"}
+            }, "Please Select", new { @class = "form-control" })
+                @Html.ValidationMessageFor(row => row.Gender)
+            </div>
+            <div class="col-md-6">
+                @Html.LabelFor(row => row.Size, "Size")
+                @Html.TextBoxFor(row => row.Size, new { @class = "form-control", placeholder = "Size" })
+                @Html.ValidationMessageFor(row => row.Size)
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Create</button>
+        <a href="/Admin/Product" class="btn btn-danger">Cancel</a>
+    }
+</div>
+

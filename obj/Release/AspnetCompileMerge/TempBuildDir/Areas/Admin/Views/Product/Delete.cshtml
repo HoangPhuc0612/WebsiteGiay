@@ -1,0 +1,38 @@
+﻿@model WebsiteGiay.Models.Product
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="form_container container-fluid">
+    @using (Html.BeginForm("Delete", "Product", new {area="Admin"}, FormMethod.Post))
+    {
+        <div class="row" style="margin-bottom:10px;">
+
+            <div class="col-md-6">
+                @Html.TextBoxFor(row => row.ProductId, new { @class = "form-control", type = "hidden", value = Model.ProductId })
+            </div>
+            <div>
+                <table class="table" style=" border-radius: 20px; box-shadow: 0 0 8px rgba(0,0,0,0.6); text-align: center;vertical-align:text-bottom;">
+                    <tr>
+                        <th>Product Picture</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Product Brand</th>
+                        <th>Product Category</th>
+                    </tr>
+                    <tr style="font-size:20px;">
+                        <td><img src="@Model.ImageURL" style="border-radius:20px;width:250px;" /></td>
+                        <td>@Model.ProductName</td>
+                        <td>@Html.DisplayFor(row => row.Price).ToString().Replace(",", ".")</td>
+                        <td>@Model.Brand.BrandName</td>
+                        <td>@Model.Category.CategoryName</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="/Admin/Product" class="btn btn-dark">Cancel</a>
+    }
+</div>
+
+

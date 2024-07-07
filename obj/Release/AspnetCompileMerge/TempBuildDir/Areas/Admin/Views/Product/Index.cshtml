@@ -1,0 +1,126 @@
+﻿@model List<WebsiteGiay.Models.Product>
+
+
+<div class="section_main container-fluid row">
+    <div class="sidebar col-md-3">
+        <ul class="list-group" style="background-color: whitesmoke;">
+            <li class="list-group-item">
+                @using (Html.BeginForm("Index", "Product", new {area="Admin"}, FormMethod.Get, new { id = "myForm", @class = "d-flex justify-content-around" }))
+                {
+                    @Html.TextBox("search", @ViewBag.Search as string, new { @class = "form-control w-auto", placeholder = "Tìm kiếm" })
+                    <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i></button>
+                }
+            </li>
+            <li class="list-group-item">
+                <ul class="Gender_list">
+                    <li><a href="/Admin/Product/Index?sort=@ViewBag.Sort&gender=Unisex&category=@ViewBag.Cate">TẤT CẢ</a></li>
+                    <li><a href="/Admin/Product/Index?sort=@ViewBag.Sort&gender=Male&category=@ViewBag.Cate">NAM</a></li>
+                    <li><a href="/Admin/Product/Index?sort=@ViewBag.Sort&gender=Female&category=@ViewBag.Cate">NỮ</a></li>
+                </ul>
+            </li>
+            <li class="list-group-item itemHeader">
+                <h5>DÒNG SẢN PHẨM</h5>
+            </li>
+            @foreach (var item in ViewBag.ListBrand)
+            {
+                <li class="list-group-item">
+                    <a class="nav-link" href="/Admin/product/Index?sort=@item.BrandName&gender=@ViewBag.Gender&category=@ViewBag.Cate">@item.BrandName</a>
+                </li>
+            }
+            <li class="list-group-item itemHeader">
+                <h5>KIỂU DÁNG</h5>
+            </li>
+            @foreach (var item in ViewBag.ListCate)
+            {
+                <li class="list-group-item">
+                    <a class="nav-link" href="/Admin/product/Index?sort=@ViewBag.Sort&gender=@ViewBag.Gender&category=@item.CategoryName">@item.CategoryName</a>
+                </li>
+            }
+            <li class="list-group-item itemHeader">
+                <h5>CHỌN THEO GIÁ</h5>
+            </li>
+
+            <li class="list-group-item">
+                <a class="nav-link" href="/Admin/Product/Index?sort=@ViewBag.Sort&gender=@ViewBag.Gender&category=@ViewBag.Cate&price=500-600k">500.000đ - 600.000đ</a>
+            </li>
+            <li class="list-group-item">
+                <a class="nav-link" href="/Admin/Product/Index?sort=@ViewBag.Sort&gender=@ViewBag.Gender&category=@ViewBag.Cate&price=600-900k">600.000đ - 900.000đ</a>
+            </li>
+            <li class="list-group-item">
+                <a class="nav-link" href="/Admin/Product/Index?sort=@ViewBag.Sort&gender=@ViewBag.Gender&category=@ViewBag.Cate&price=>1.000.000k">Trên 1.000.000đ</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="product_container col-md-9">
+        @foreach (var item in Model)
+        {
+            <div class="card" style="width: 18rem; height: 28rem; border-radius: 5px;">
+                <div class="small_card">
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-share"></i>
+                </div>
+                <img src="@item.ImageURL" />
+                <div class="card-body" style="text-align: center; border:1px solid black; border-radius:5px;">
+                    <h6 class="card-title" style="font-family:Agbalumo;">@item.ProductName - @item.Category.CategoryName</h6>
+                    <p class="card-text" style="color:#F15E2C; font-weight:bold;">@*@string.Format("{0:0,0 VND}", item.Price).Replace(",", ".")*@ @Html.DisplayFor(row=> item.Price).ToString().Replace(",",".")</p>
+                    @Html.ActionLink("Edit","Edit",new { id = item.ProductId ,controller = "Product", area="Admin" },new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete","Delete", new { id = item.ProductId, controller = "Product", area = "Admin" }, new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        }
+    </div>
+    @{
+        if (ViewBag.NoPaging!=1)
+        {
+            <div class="paging_container">
+                @{
+                    int PrevPage = ViewBag.Page - 1;
+                    if (PrevPage <= 0)
+                    {
+                        PrevPage = 1;
+                    }
+                    int NextPage = ViewBag.Page + 1;
+                    if (NextPage > ViewBag.NoOfPages)
+                    {
+                        NextPage = ViewBag.NoOfPages;
+                    }
+                }
+                <ul class="pagination d-flex justify-content-center flex-row">
+                    @{
+                        if (ViewBag.Page - 1 > 0)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="/Admin/product/Index?sort=@ViewBag.Sort&gender=@ViewBag.Gender&category=@ViewBag.Cate&page=@PrevPage"><</a>
+                            </li>
+                        }
+                    }
+                    @for (int i = 0; i < ViewBag.NoOfPages; i++)
+                    {
+                        if (i + 1 == ViewBag.Page)
+                        {
+                            <li class="page-item active">
+                                <a class="page-link" style="pointer-events:none;" href="/Admin/product/Index?sort=@ViewBag.Sort&gender=@ViewBag.Gender&category=@ViewBag.Cate&page=@(i+1)">@(i + 1)</a>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="/Admin/product/Index?sort=@ViewBag.Sort&gender=@ViewBag.Gender&category=@ViewBag.Cate&page=@(i+1)">@(i + 1)</a>
+                            </li>
+                        }
+                    }
+                    @{
+                        if (ViewBag.Page < ViewBag.NoOfPages)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="/Admin/product/Index?sort=@ViewBag.Sort&gender=@ViewBag.Gender&category=@ViewBag.Cate&page=@NextPage">></a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        }
+    }
+</div>
